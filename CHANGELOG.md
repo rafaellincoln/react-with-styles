@@ -1,3 +1,9 @@
+## v3.3.2
+- [fix] fix `cssCustom` is not a function
+
+## v3.3.1
+- [new] Add `cssCustom` method
+
 ## v3.2.1
 - [deps] Update `hoist-non-react-statics`, `prop-types`, `react-with-direction`
 - [fix] Move work out of render and into state ([156](https://github.com/airbnb/react-with-styles/pull/156))
