@@ -26,7 +26,7 @@ function get() {
   return styleTheme;
 }
 
-function resolve(...styles) {
+function resolve(prop, ...styles) {
   if (
     process.env.NODE_ENV !== 'production'
     && typeof performance !== 'undefined'
@@ -35,7 +35,7 @@ function resolve(...styles) {
     performance.mark('react-with-styles.resolve.start');
   }
 
-  const result = styleInterface.resolve(styles);
+  const result = styleInterface.resolve(styles, prop);
 
   if (
     process.env.NODE_ENV !== 'production'
@@ -59,7 +59,15 @@ function resolveLTR(...styles) {
     return styleInterface.resolveLTR(styles);
   }
 
-  return resolve(styles);
+  return resolve(null, styles);
+}
+
+function resolveCustomLTR(prop, ...style) {
+  if (styleInterface.resolveLTR) {
+    return styleInterface.resolveLTR(styles);
+  }
+  
+  return resolve(prop, styles);
 }
 
 function resolveRTL(...styles) {
@@ -67,7 +75,7 @@ function resolveRTL(...styles) {
     return styleInterface.resolveRTL(styles);
   }
 
-  return resolve(styles);
+  return resolve(null, styles);
 }
 
 function flush() {

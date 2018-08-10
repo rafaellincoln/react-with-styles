@@ -1,4 +1,4 @@
-# react-with-styles <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
+# react-with-styles-custom <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
 
 [![Build Status][travis-svg]][travis-url]
 [![dependency status][deps-svg]][deps-url]
@@ -19,7 +19,7 @@ Use CSS-in-JavaScript for your React components without being tightly coupled to
 
 [interface-aphrodite]: https://github.com/airbnb/react-with-styles-interface-aphrodite
 [interface-jss]: https://github.com/oliviertassinari/react-with-styles-interface-jss
-[interface-react-native]: https://github.com/airbnb/react-with-styles-interface-react-native
+[interface-react-native]: https://github.com/rafaellincoln/react-native-with-styles-interface-platform
 [interface-css]: https://github.com/airbnb/react-with-styles-interface-css
 
 ## Other resources

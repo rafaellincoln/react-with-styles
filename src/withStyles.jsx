@@ -10,6 +10,7 @@ import ThemedStyleSheet from './ThemedStyleSheet';
 
 // Add some named exports to assist in upgrading and for convenience
 export const css = ThemedStyleSheet.resolveLTR;
+export const cssCustom = ThemedStyleSheet.resolveCustomLTR;
 export const withStylesPropTypes = {
   styles: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   theme: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
