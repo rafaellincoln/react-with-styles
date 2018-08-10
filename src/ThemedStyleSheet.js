@@ -62,11 +62,11 @@ function resolveLTR(...styles) {
   return resolve(null, styles);
 }
 
-function resolveCustomLTR(prop, ...style) {
+function resolveCustomLTR(prop, ...styles) {
   if (styleInterface.resolveLTR) {
     return styleInterface.resolveLTR(styles);
   }
-  
+
   return resolve(prop, styles);
 }
 
@@ -93,6 +93,7 @@ export default {
   get,
   resolve: resolveLTR,
   resolveLTR,
+  resolveCustomLTR,
   resolveRTL,
   flush,
 };

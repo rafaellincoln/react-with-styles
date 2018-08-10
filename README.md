@@ -287,6 +287,46 @@ export default withStyles(({ color, unit }) => ({
 
 `className` and `style` props must not be used on the same elements as `css()`.
 
+## `cssCustom(propName, ...styles)`
+
+This function takes styles that were processed by `withStyles()`, plain objects, or arrays of these things. It returns an object with an opaque structure that must be spread into a JSX element.
+
+```jsx
+import React from 'react';
+import { cssCustom, withStyles } from './withStyles';
+
+function MyComponent({ bold, padding, styles }) {
+  return (
+    <MyCustomDiv {...cssCustom('styleDiv', styles.container, { padding })}>
+      Try to be a rainbow in{' '}
+      <MyCustomArchor
+        href="/somewhere"
+        {...cssCustom('styleArchor', styles.link, bold && styles.link_bold)}
+      >
+        someone's cloud
+      </MyCustomArchor>
+    </MyCustomDiv>
+  );
+}
+
+export default withStyles(({ color, unit }) => ({
+  container: {
+    color: color.primary,
+    marginBottom: 2 * unit,
+  },
+
+  link: {
+    color: color.secondary,
+  },
+
+  link_bold: {
+    fontWeight: 700,
+  },
+}))(MyComponent);
+```
+
+`className` and `param (passed as prop in cssCustom` props must not be used on the same elements as `cssCustom()`.
+
 ## Examples
 ### With React Router's `Link`
 [React Router][react-router]'s [`<Link/>`][react-router-link] and [`<IndexLink/>`][react-router-index-link] components accept `activeClassName='...'` and `activeStyle={{...}}` as props. As previously stated, `css(...styles)` must spread to JSX, so simply passing `styles.thing` or even `css(styles.thing)` directly will not work. In order to mimic `activeClassName`/`activeStyles` you can use React Router's [`withRouter()`][react-router-with-router] Higher Order Component to pass `router` as prop to your component and toggle styles based on [`router.isActive(pathOrLoc, indexOnly)`](react-router-is-active). This works because `<Link />` passes down the generated `className` from `css(..styles)` down through to the final leaf.

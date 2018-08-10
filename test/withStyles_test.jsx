@@ -27,6 +27,7 @@ describe('withStyles()', () => {
       createRTL() {},
       resolve() {},
       resolveLTR() {},
+      resolveCustomLTR() {},
       resolveRTL() {},
       flush: sinon.spy(),
     };
@@ -345,6 +346,7 @@ describe('withStyles()', () => {
       delete expectedPropTypes.styles;
       delete expectedPropTypes.theme;
       delete expectedPropTypes.css;
+      delete expectedPropTypes.cssCustom;
       expect(Wrapped.propTypes).to.eql(expectedPropTypes);
       expect(MyComponent.propTypes).to.include.keys('styles', 'theme');
 
@@ -398,6 +400,24 @@ describe('withStyles()', () => {
     it('css calls resolveLTR method in LTR context', () => {
       function MyComponent({ css }) {
         return <div {...css({ color: 'red' })} />;
+      }
+      MyComponent.propTypes = {
+        ...withStylesPropTypes,
+      };
+
+      const WrappedComponent = withStyles(() => ({}))(MyComponent);
+
+      render((
+        <DirectionProvider direction={DIRECTIONS.LTR}>
+          <WrappedComponent />
+        </DirectionProvider>
+      ));
+      expect(testInterfaceResolveLTRStub.callCount).to.equal(1);
+    });
+
+    it('css calls resolveCustomLTR method in LTR context', () => {
+      function MyComponent({ cssCustom }) {
+        return <div {...cssCustom('style', { color: 'red' })} />;
       }
       MyComponent.propTypes = {
         ...withStylesPropTypes,

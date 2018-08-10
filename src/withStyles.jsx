@@ -15,6 +15,7 @@ export const withStylesPropTypes = {
   styles: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   theme: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   css: PropTypes.func.isRequired,
+  cssCustom: PropTypes.func,
 };
 
 const EMPTY_STYLES = {};
@@ -44,6 +45,7 @@ export function withStyles(
     stylesPropName = 'styles',
     themePropName = 'theme',
     cssPropName = 'css',
+    cssCustomPropName = 'cssCustom',
     flushBefore = false,
     pureComponent = false,
   } = {},
@@ -188,6 +190,7 @@ export function withStyles(
               [themePropName]: ThemedStyleSheet.get(),
               [stylesPropName]: styleDef(),
               [cssPropName]: resolveMethod,
+              [cssCustomPropName]: ThemedStyleSheet.resolveCustomLTR,
             }}
           />
         );
@@ -202,6 +205,7 @@ export function withStyles(
       delete WithStyles.propTypes[stylesPropName];
       delete WithStyles.propTypes[themePropName];
       delete WithStyles.propTypes[cssPropName];
+      delete WithStyles.propTypes[cssCustomPropName];
     }
     if (WrappedComponent.defaultProps) {
       WithStyles.defaultProps = deepmerge({}, WrappedComponent.defaultProps);
